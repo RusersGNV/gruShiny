@@ -5,7 +5,10 @@
 # line refers to different year.
 
 library(shiny)
-library(tidyverse)
+# library(tidyverse)
+library(readr)
+library(ggplot2)
+library(dplyr)
 library(lubridate)
 library(plotly)
 
@@ -35,12 +38,12 @@ ui <- fluidPage(
                          "Year of interest:",
                          choices = 2015:2018,
                          selected = 2017
-                        )
+      )
     ),
     
     # Showing the output plot
     mainPanel(
-      plotOutput("usagePlot")
+      plotlyOutput("usagePlot")
     )
   )
 )
@@ -48,13 +51,14 @@ ui <- fluidPage(
 # Define server logic
 server <- function(input, output) {
   
-  output$usagePlot <- renderPlot({
+  output$usagePlot <- renderPlotly({
     # generate plot based on area and year of interest from ui
     p <- monthly %>%
       dplyr::filter(zone == input$Area) %>%
       dplyr::filter(Year %in% input$Year) %>%
       ggplot(aes(x=Month, y=KWH, col=as.factor(Year))) +
-      geom_line()
+      geom_line() 
+    p <- p %>% ggplotly()
     
     p
   })
