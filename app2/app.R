@@ -7,7 +7,6 @@
 library(shiny)
 library(tidyverse)
 library(lubridate)
-library(plotly)
 
 monthly <- read_rds("gru_monthly.rds")
 
@@ -40,6 +39,7 @@ ui <- fluidPage(
     
     # Showing the output plot
     mainPanel(
+      textOutput("plotTitle"),
       plotOutput("usagePlot")
     )
   )
@@ -47,15 +47,23 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output) {
+  output$plotTitle <- renderText({
+    area <- ifelse(input$Area == "All", "", input$Area)
+    year <- paste(input$Year, collapse = ", ")
+    t <- paste("Mean monthly eletricity usage per unit in ",
+               area, " Gainesville in year ",
+               year)
+    t
+  })
   
   output$usagePlot <- renderPlot({
     # generate plot based on area and year of interest from ui
     p <- monthly %>%
       dplyr::filter(zone == input$Area) %>%
       dplyr::filter(Year %in% input$Year) %>%
-      ggplot(aes(x=Month, y=KWH, col=as.factor(Year))) +
+      ggplot(aes(x=Month, y=KWH, group=as.factor(Year), 
+                 color=as.factor(Year))) +
       geom_line()
-    
     p
   })
 }
