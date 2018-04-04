@@ -28,13 +28,19 @@ ui <- fluidPage(
                               "Northwest" = "NW",
                               "Southwest" = "SW",
                               "Southeast" = "SE")
-      )
+      ),
+      checkboxGroupInput("Year",
+                         "Year of interest:",
+                         choices = 2015:2018,
+                         selected = 2017
+                        )
     ),
     
     # Showing the output plot
     # And to make it abit more complicated, we'll also
     # show a line of text that explains the plot
     mainPanel(
+      textOutput("plotTitle"),
       plotOutput("usagePlot")
     )
   )
@@ -42,10 +48,22 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output) {
+  output$plotTitle <- renderText({
+    area <- ifelse(input$Area == "All", "", input$Area)
+    year <- paste(input$Year, collapse = ", ")
+    t <- paste("Mean monthly eletricity usage per unit in ",
+               area, " Gainesville in year ",
+               year)
+    t
+  })
+  
   output$usagePlot <- renderPlot({
+    # generate plot based on area and year of interest from ui
     p <- monthly %>%
       dplyr::filter(zone == input$Area) %>%
-      ggplot(aes(x=Date, y=KWH)) +
+      dplyr::filter(Year %in% input$Year) %>%
+      ggplot(aes(x=Month, y=KWH, group=as.factor(Year), 
+                 color=as.factor(Year))) +
       geom_line()
     p
   })

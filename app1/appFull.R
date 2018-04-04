@@ -15,7 +15,8 @@ library(tidyverse)
 # column is already being recognized as "date" object. This
 # is very useful for sharing your data to your peer who might
 # not be familiar with date object in R.
-
+monthly <- read_rds("gru_monthly.rds")
+monthly
 
 # Defining the UI, you know, User Interface
 # the variable ui is by default defined by a function called
@@ -34,7 +35,14 @@ ui <- fluidPage(
    # Let's create a "dropdown menu" using "selectInput"
    sidebarLayout(
       sidebarPanel(
-         selectInput()
+         selectInput("Area",
+                     "Area of interest:",
+                     choices = c("All" = "All",
+                                 "Northeast" = "NE",
+                                 "Northwest" = "NW",
+                                 "Southwest" = "SW",
+                                 "Southeast" = "SE")
+                     )
       ),
       
       # mainPanel points to the main area, and the graphical
@@ -43,7 +51,7 @@ ui <- fluidPage(
       # We're "outputting" a line graph, so plotOutput belongs
       # here. 
       mainPanel(
-         plotOutput()
+         plotOutput("usagePlot")
       )
    )
 )
@@ -56,7 +64,15 @@ ui <- fluidPage(
 # We want to create plot, so we use "renderPlot" here.
 server <- function(input, output) {
    
-   output$usagePlot <- renderPlot()
+   output$usagePlot <- renderPlot({
+      # generate plot based on area of interest from ui
+      p <- monthly %>%
+        filter(zone == input$Area) %>%
+        ggplot(aes(x=Date, y=KWH)) +
+        geom_line()
+      
+      p
+   })
 }
 
 # Run the application 

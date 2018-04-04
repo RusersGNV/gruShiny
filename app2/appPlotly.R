@@ -1,15 +1,11 @@
-# In this app, we want to allow people to look at
-# not only the electricity usage of area of interest
-# but also the year of interest. The output will be
-# a linegraph with month as x-axis... and different
-# line refers to different year.
+# This app is to demonstrate how we can put up an
+# interactive plot as output. Plotly is one of the
+# package that allows us to convert the "static"
+# plot to "interactive plot". It is rich on its own
+# but here we rely on only a few functions.
 
 library(shiny)
-# library(tidyverse)
-library(readr)
-library(ggplot2)
-library(dplyr)
-library(lubridate)
+library(tidyverse)
 library(plotly)
 
 monthly <- read_rds("gru_monthly.rds")
@@ -20,10 +16,8 @@ ui <- fluidPage(
   # Application title
   titlePanel("GRU Monthly Electricity Usage"),
   
-  # Now that there are two input parameters: Area and year
-  # We need two input elements. Since we may want to allow
-  # user to choose more than one year, drop down may not
-  # be the best idea. What about checkboxes?
+
+  # Dropdown & checkbox
   sidebarLayout(
     sidebarPanel(
       selectInput("Area",
@@ -41,8 +35,12 @@ ui <- fluidPage(
       )
     ),
     
-    # Showing the output plot
+    # Text and a plot
+    # Since the output plot is now a "plotly plot",
+    # and not supported by `plotOutput`, we'll use
+    # another function here: `plotlyOutput`
     mainPanel(
+      textOutput("plotTitle"),
       plotlyOutput("usagePlot")
     )
   )
@@ -52,7 +50,9 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   output$usagePlot <- renderPlotly({
-    # generate plot based on area and year of interest from ui
+    # The plotly package provides a function called
+    # `ggplotly` that can convert a ggplot object to
+    # a plotly plot object. Super easy!
     p <- monthly %>%
       dplyr::filter(zone == input$Area) %>%
       dplyr::filter(Year %in% input$Year) %>%
