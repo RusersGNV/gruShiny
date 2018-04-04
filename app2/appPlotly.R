@@ -30,7 +30,7 @@ ui <- fluidPage(
       ),
       checkboxGroupInput("Year",
                          "Year of interest:",
-                         choices = 2015:2018,
+                         choices = 2014:2018,
                          selected = 2017
       )
     ),
