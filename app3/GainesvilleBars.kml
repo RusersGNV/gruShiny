@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>GainesvilleBars</name>
+    <Style id="icon-1899-0288D1-nodesc-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-nodesc-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>Rockeys Dueling Piano Bar</name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.3252862,29.6505234,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Arcade Bar</name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.3247243,29.6521194,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>GAINESVILLE ALE HOUSE</name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.3814148,29.6211939,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>TGI Fridays</name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.3830508,29.6258614,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>The Social at Midtown</name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.3455921,29.6524465,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>The Brass Tap - Gainesville</name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.381029,29.6195506,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Boca Fiesta</name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.3242524,29.649311,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Miller's Ale House - Gainesville]]></name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.3827094,29.6198143,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Harry's Seafood Bar & Grille]]></name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.324183,29.650773,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Chili's Grill & Bar]]></name>
+      <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -82.3763195,29.6240797,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

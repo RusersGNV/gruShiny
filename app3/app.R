@@ -3,7 +3,10 @@ library(shiny)
 library(shinydashboard)
 
 
-monthly <- read_rds("gru_monthly.rds")
+bars <- rgdal::readOGR("GainesvilleBars.kml")
+
+icons <- awesomeIcons(icon = 'beer', library = 'fa', 
+                      iconColor = "#0021A5", markerColor = 'orange')
 
 ui <- dashboardPage(
   dashboardHeader(),
@@ -26,6 +29,8 @@ server <- function(input, output) {
       leaflet() %>%
         setView(lat = 29.6436, lng = -82.3549, zoom = 14) %>% 
         addProviderTiles(provider = input$basemap) %>% 
+        #addMarkers(data = bars, label = bars@data$Name) %>% 
+        addAwesomeMarkers(data = bars, label = bars@data$Name, icon = icons) %>% 
         addMeasure() %>%
         addMiniMap()
     })
